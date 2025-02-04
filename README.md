@@ -65,4 +65,50 @@ In this Milestone,
 - Compare the resulting hash to the stored hashed password.
 - If they match, the user is authenticated; if not, send an error.
 
+## Milestone 8: Home Page creation
+In this Milestone,
 
+- Create a card component.
+- Display those cards on the products page.
+- A single card component that accepts product details as props.
+- Array mapping to iterate over the product list and render a card for each product.
+- Reusable card component with props for product details (e.g., name, image, price).
+- A grid layout or flexbox for displaying multiple cards neatly.
+- A home page with a route connecting to app.jsx.
+
+## Milestone 9: Product Creation Page
+In this Milestone,
+
+- Learned how to create a form that will take all the details of product
+- Learned how to take multiple images as input.
+- Creating the page using Tailwind CSS and React JS.
+- Form creation using useState.
+- And styling it accordingly using Tailwind CSS
+  
+## Milestone 10: Connecting to Mongo DB
+In this Milestone,
+
+- Learned how to write product schema using mongoose
+- Learned how to create an end point to validate and store product details in mongodb.
+- Get about 10 images from the user and post it to backend.
+- Use Multer to store the images in the Product folder.
+- Build a POST endpoint to receive product data.
+- Validate and save the product details to MongoDB.
+
+## Milestone 11: Dynamic Product Card
+In this Milestone,
+
+- To write an endpoint that will send data from extract and send data from mongodb.
+- To receive data at frontend -How to display that data dynamically using product card created earlier.
+- Change a bit of data in Multer.js
+- Dynamically add the created products to the home page.
+- View the data from the main page.
+
+## Milestone 12: Dynamic Filtering
+In this Milestone,
+
+- To write an endpoint that will send data by filtering with my mail and send data from mongodb.
+- To receive data at frontend -How to display that data dynamically using product card created earlier.
+- The user can give their email, and the products from that email can be seen.
+- We create a new page myProducts to show the products of the user.
+- We update product.js in the backend to create,save and show the product.

@@ -4,6 +4,10 @@ const ErrorHandler = require("./middleware/error");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const product = require('./controllers/product');
+const path=require('path')
+
+
 
 app.use(express.json());
 app.use(cookieParser());
@@ -17,9 +21,14 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
   });
 };
 //import Routes
-const user = require("./controllers/user.js");
+const user = require("./controllers/user");
 
 app.use("/api/v2/user", user);
+app.use("/api/v2/product", product);
+
+// Serve static files for uploads and products
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/products', express.static(path.join(__dirname, 'products')));
 
 // it's for ErrorHandling
 app.use(ErrorHandler);
