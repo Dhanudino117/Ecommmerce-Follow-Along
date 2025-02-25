@@ -1,29 +1,32 @@
+import React from 'react'
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import LoginPage from './pages/loginPage'
+import SignupPage from './pages/singUpPage';
+import Home from './pages/Home';
+import CreateProduct from './pages/createProduct';
 import "./App.css";
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
-import HomePage from "./pages/HomePage";
-import CreatePage from "./pages/createPage";
-import MyProducts from "./pages/myProduct";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import CreateProduct from "./pages/createPage";
-import Cart from "./pages/cart";
+import MyProducts from './pages/myProducts';  
+import Cart from './pages/cart';
+import ProductDetails from './pages/ProductDetails'
+import Profile from "./pages/profile"
 
-function App() {
+const App = () => {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/create-product" element={<CreatePage />} />
-          <Route path="/my-products" element={<MyProducts />} />
-          <Route path="/create-product/:id" element={<CreateProduct />} />
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
+    <BrowserRouter>
+    <Routes>
+    <Route path="/" element={<Home />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/sign-up" element={<SignupPage />} />
+        <Route path="/create-product" element={<CreateProduct />} />
+        <Route path="/create-product/:id" element={<CreateProduct />} />
+        <Route path="/my-products" element={<MyProducts />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/profile" element={<Profile />} />
+    </Routes>
+    </BrowserRouter>
+    
+  )
 }
 
-export default App;
+export default App

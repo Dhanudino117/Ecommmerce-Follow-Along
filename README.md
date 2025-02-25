@@ -112,3 +112,73 @@ In this Milestone,
 - The user can give their email, and the products from that email can be seen.
 - We create a new page myProducts to show the products of the user.
 - We update product.js in the backend to create,save and show the product.
+
+## Milestone 13:
+In this Milestone,
+
+- Write an endpoint that will update the existing data in MongoDB.
+- Auto fill the form with previous data and give option to edit.
+- We use router and post method.
+- The entire data and also part of data can be changed.
+- frontend we will add an edit button to the product card. When click on edit we will send the data to form and make it auto fill and have option to edit those data and save.
+
+## Milestone 14:
+In this Milestone,
+
+- Write an endpoint that delete the product with specific ID from MongoDB.
+- We use routers to delete the product
+- In frontend we will add an delete button to the product card.
+- When click on delete button we will send the product id to server endpoint.
+- After deleting the product will be removed from user's page.
+
+## Milestone 15: Nav Bar
+In this Milestone,
+
+- Creating and Nav component.
+- Reusing the same component in multiple pages.
+- Create an new Nav component with links to all pages:
+     - Home
+     - My-products 
+     - Add product
+     - cart
+- Adding the nav component to all the pages and make the navigations to all this pages smooth and easy.
+- Making the Navbar responsive to all screen sizes.
+
+## Milestone 16: New Product Page
+In this Milestone,
+
+- Create an product info page that display all the product data and choose quantity and add to card button.
+- New page to display each product.
+- Adding quantity and add to card button.
+
+
+## Milestone 17: Cart
+In this Milestone,
+
+- Edit the user schema to store cart products .
+- Write an end point to receive the product details and store in database.
+
+
+## Milestone 18: Cart continuation
+In this Milestone,
+
+- Create an endpoint to receive request from cart page.
+- Create an backend endpoint to fetch all the products inside cart with user mail.
+
+
+## Milestone 19: Cart Page
+In this Milestone,
+
+- Create an cart page that display the products inside cart using endpoint that we used in the previous milestone.
+- Adding + and - buttons to increase or decrease the quantity of the products.
+- Also write an endpoint to increase and decrease the quantity.
+- Creating cart frontend page and display the products.
+- Using PUT method to update the data.
+
+
+## Milestone 20: Profile Page
+In this Milestone,
+
+- Create and backend endpoint that will send all the user data using mail.
+- Create an frontend profile page that will display all the user data.
+- Display profile photo, name, mail and addresses.

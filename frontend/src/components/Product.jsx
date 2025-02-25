@@ -1,58 +1,42 @@
-import PropTypes from "prop-types";
-import {useState, useEffect } from "react";
 
-const Product = ({ name, images, description, price }) => {
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+export default function Product({ _id, name, images, description, price }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!images || images.length === 0) return;
-    if (images.length === 1) {
-      setCurrentIndex(0); // Ensure the first image is shown if there's only one
-    } else {
-      const interval = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 2000);
-      return () => clearInterval(interval); // Cleanup on unmount
-    }
+    const interval = setInterval(() => {
+      setCurrentIndex(prevIndex => (prevIndex + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(interval); // Cleanup on unmount
   }, [images]);
 
+
+
   const currentImage = images[currentIndex];
-  let imageUrl = ''
-  if (currentImage.includes('\\')) {
-    imageUrl = `http://localhost:8000/${currentImage.replace(/\\/g, '/')}`; // Convert backslashes to forward slashes
-  } else {
-    imageUrl = `http://localhost:8000${currentImage}`; // For paths with forward slashes
-  }
- 
-
-  console.log("Image URL being used:", imageUrl); // Debugging log
-
   return (
-    <div className="bg-black p-4 rounded-lg shadow-lg hover:shadow-2xl transform transition-transform hover:scale-105 flex flex-col items-center">
-      <div className="w-full">
+    <div className="bg-neutral-200 p-4 rounded-lg shadow-md flex flex-col justify-between">
+      <div className="w-full ">
         <img
-          src={imageUrl} // Correctly formatted image URL
+          src={`http://localhost:8000${currentImage}`} // Ensure the URL is correct\
           alt={name}
-          className="w-full h-48 object-cover rounded-lg mb-4"
+          className="w-full h-56 object-cover rounded-lg mb-2"
         />
-        <h2 className="text-xl font-semibold text-white mb-2 text-center">{name}</h2>
-        <p className="text-sm text-white text-center mb-4">{description}</p>
+        <h2 className="text-lg font-bold">{name}</h2>
+        <p className="text-sm opacity-75 mt-2">{description}</p>
       </div>
-      <div className="w-full text-center">
-        <p className="text-lg font-bold text-white mb-4">${price.toFixed(2)}</p>
-        <button className="text-white bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full transition-all">
+      <div className="w-full mt-4">
+        <p className="text-lg font-bold my-2">${price.toFixed(2)}</p>
+
+        <button className="w-full text-white px-4 py-2 rounded-md bg-black hover:bg-neutral-700 transition duration-300"
+          onClick={() => navigate(`/product/${_id}`)}
+        >
           More Info
         </button>
       </div>
     </div>
   );
-};
-
-Product.propTypes = {
-  name: PropTypes.string.isRequired,
-  images: PropTypes.array.isRequired, // Updated to an array of strings
-  description: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-};
-
-export default Product;
+}

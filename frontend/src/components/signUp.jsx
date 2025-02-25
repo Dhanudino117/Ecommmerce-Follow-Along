@@ -1,37 +1,28 @@
-import { useForm} from 'react-hook-form';
-import  { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
+import '../App.css';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import axios from "axios";
+import axios from 'axios';  // Don't forget to import axios
 
-function signUp() {
-
-  const { register, handleSubmit, formState: { errors }, reset,watch } = useForm({
-    defaultValues: {
-      name: "",
-      email:"",
-      password: "",
-      confirmPassword: ""
-    }
-  });
-  
+function Signup() {
+  const { register, handleSubmit, formState: { errors }, reset, watch } = useForm();
+  const [submit, setSubmit] = useState(false);
   const [avatar, setAvatar] = useState(null);
+  const [previewPic, setPreviewPic] = useState(null);
 
-  const onSubmit = async (data) => {
+  const doneSubmit = async(data) => {
     console.log(data);
+    setSubmit(true);
+    setPreviewPic(null)
     reset();
-  
-
-   
 
     // Prepare FormData with form data and image file
     const newForm = new FormData();
     newForm.append("file", avatar);  // Image file
-    newForm.append("name", data.name);
+    newForm.append("firstname", data.firstname);
+    newForm.append("lastname", data.lastname);
     newForm.append("email", data.email);
     newForm.append("password", data.password);
-
-
 
 
     const config = {
@@ -41,7 +32,6 @@ function signUp() {
       },
     };
 
- 
     axios
     .post("http://localhost:8000/api/v2/user/create-user", newForm, config)
     .then((res) => {
@@ -50,129 +40,100 @@ function signUp() {
     .catch((err) => {
       console.error(err.response ? err.response.data : err.message); // Error handling
     });
+  };
 
-};
+  const password = watch("password");
 
-const [previewImage, setPreviewImage] = useState(null);
-
- 
-const password = watch('password');
-
-const handleFileChange = (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const imageUrl = URL.createObjectURL(file); // Create preview URL
-    setPreviewImage(imageUrl);
-    setAvatar(file)
-
-  }
-};
-
-
-
+  const handlePic = (e) => {
+    const image = e.target.files[0];
+    if (image) {
+      const imageUrl = URL.createObjectURL(image);
+      setPreviewPic(imageUrl);
+      setAvatar(image)
+    }
+  };
 
   return (
-    <>
-      <div className="signup-container flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="signupInbox w-full max-w-sm p-6 bg-white rounded-xl shadow-lg">
-          <form onSubmit={handleSubmit(onSubmit)}>
-          <h1 className="text-2xl font-semibold text-center text-gray-700 mb-6">Sign Up</h1>
+    <div className="flex items-center justify-center min-h-screen w-screen bg-gray-200">
+      <div className="max-w-lg m-5 p-4 text-center bg-white rounded-lg shadow-2xl shadow-black">
+        <h1 className='text-blue-500 text-2xl pb-3 font-bold'>SIGN UP</h1>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit(doneSubmit)}>
 
-          
-            <label>Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="w-full px-4 py-2 mt-1 text-gray-700 bg-gray-100 border rounded-lg"
-              {...register("name", { required: "Name is required" })}
-            />
-            {errors.name && <div className="text-red-500 text-xs">{errors.name.message}</div>}
-            <br />
-
-            <label>Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full px-4 py-2 mt-1 text-gray-700 bg-gray-100 border rounded-lg"
-              {...register("email", { required: "Email is required",
-                pattern: { value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "Invalid email" }
-               })}
-            />
-            {errors.email && <div className="text-red-500 text-xs">{errors.email.message}</div>}
-            <br />
-
-            <label>Password:</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="w-full px-4 py-2 mt-1 text-gray-700 bg-gray-100 border rounded-lg"
-              {...register("password", { required: "Password is required",
-               minLength: { value: 4, message: "Password must be at least 8 characters"},
-               maxLength: { value: 20, message: "Password must be at most 20 characters"},
-               pattern:{ value:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/,  
-                message:'Password must contain at least one uppercase, one lowercase letter, and one number,and a special character',}
-               })}
-            />
-            {errors.password && <div className="text-red-500 text-xs">{errors.password.message}</div>}
-            <br />
-
-            <label > Confirm Password:
-          </label>
           <input
-            type="password"
-            className="w-full px-4 py-2 mt-1 text-gray-700 bg-gray-100 border rounded-lg"
-            {...register('confirmPassword', {
-              required: 'Confirm Password is required',
-              validate: (value) =>
-                value === password || 'Passwords do not match',
+            placeholder='First Name'
+            className='p-3 border-2 rounded-md'
+            {...register('firstname', { required: "First Name is required" })}
+          />
+          {errors.firstname && <span className='flex justify-start rounded-md pl-2 text-red-500'>{errors.firstname.message}</span>}
+
+          <input
+            placeholder='Last Name'
+            className='p-3 border-2 rounded-md'
+            {...register('lastname', { required: "Last Name is required" })}
+          />
+          {errors.lastname && <span className='flex justify-start pl-2 rounded-md text-red-500'>{errors.lastname.message}</span>}
+
+          <input
+            placeholder="Email"
+            className='p-3 border-2 rounded-md'
+            {...register("email", {
+              required: "Email is required",
+              pattern: { value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: "Invalid Email" },
             })}
           />
-          {errors.confirmPassword && (
-            <p className="text-xs text-red-500">{errors.confirmPassword.message}</p>
-          )}
+          {errors.email && <span className='flex justify-start pl-2 text-red-500'>{errors.email.message}</span>}
 
-            <input
-            type="file"
-            id = "profilePic"
-            accept = "image/*"
-            className="mt-3 block w-full text-sm text-gray-500  file:border file:border-gray-300 file:text-xs file:font-medium file:bg-white file:rounded-md"
-            onChange={handleFileChange}
-            
-            
-            >
-            </input>
+          <input
+            type='password'
+            placeholder="Password"
+            className='p-3 border-2 rounded-md'
+            {...register("password", {
+              required: "Password is required",
+              minLength: { value: 5, message: "Password must be more than 5 characters" },
+              maxLength: { value: 20, message: "Password cannot exceed 20 characters" },
+              pattern: { value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{5,}$/, message: "Password must contain at least a digit, special character, an Upper Case, and a lower case character" }
+            })}
+          />
+          {errors.password && <span className='flex justify-start pl-2 text-red-500'>{errors.password.message}</span>}
 
-            {previewImage && (
-            <div className="mt-4">
-              <p className="text-sm text-gray-700">Image Preview:</p>
-              <img
-                src={previewImage}
-                alt="Profile Preview"
-                className="w-24 h-24 object-cover rounded-full mt-2"
-              />
-            </div>
-          )}
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            className="p-3 border-2 rounded-md"
+            {...register("confirmPassword", {
+              required: "Please confirm your password",
+              validate: (value) => value === password || "Passwords do not match",
+            })}
+          />
+          {errors.confirmPassword && <span className='flex justify-start pl-2 text-red-500'>{errors.confirmPassword.message}</span>}
 
-             
-            <button
-              type="submit"
-              className="m-6 mx-0 w-full px-4 py-2 text-lg font-medium text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg shadow-md hover:from-blue-600 hover:to-indigo-600"
-            >
-              SignUp
-            </button>
-            <span className="ml-20 text-gray-700 text-xs">Already have an account?</span>
-            &nbsp;<Link to="/login" className="text-blue-600 text-xs">LogIn</Link>
-          </form>
-        </div>
+          <label className='flex flex-start pl-3'>Upload Profile Picture</label>
+          <input
+            className="pl-3"
+            {...register('image', { required: "Image is required" })}
+            type='file'
+            accept='image/*'
+            onChange={handlePic}
+          />
+          {previewPic &&
+            <span className='flex justify-center'>
+              <img src={previewPic} alt="Profile" className='w-24 h-24 object-cover rounded-full' />
+            </span>}
+
+          <button type='submit' className='p-2 bg-gradient-to-r from-blue-500 to-indigo-600 h-50 rounded-md hover:bg-blue-600 text-white'>
+            SIGN UP
+          </button>
+
+          <div className='flex items-center justify-center gap-2'>
+            <span className="text-sm text-gray-600">Already have an account?</span>
+            <Link to="/login" className="text-blue-500 hover:underline text-sm">
+              Log In
+            </Link>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
+}
 
-};
-
-
-export default signUp;
+export default Signup;
