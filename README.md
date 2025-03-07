@@ -182,3 +182,48 @@ In this Milestone,
 - Create and backend endpoint that will send all the user data using mail.
 - Create an frontend profile page that will display all the user data.
 - Display profile photo, name, mail and addresses.
+
+## Milestone 21: Address Page
+In this Milestone,
+
+- Create an frontend form that will will take address.
+- Take country, city, address1, address2, zip code, address type
+- Create an state that will store input address
+- Create address form frontend page
+- when we click on add address in profile it should navigate to this form page.
+
+
+## Milestone 22: Add Address
+In this Milestone,
+
+- Create an endpoint that will receive the address from address form in frontend.
+- Add the address to the address array inside user collection.
+- Display the address in the Profile section.
+
+## Milestone 23: Place Order
+In this Milestone,
+
+- Add an button inside cart called "Place order".
+- Create an select address page where we will display all the address and ask to select delivery address.
+- Write mongoose schema for storing orders details.
+- Create an placeorder button inside cart page and navigate to select address page when clicked.
+- Create and select address page that will display all the available address and have an option to select one address.
+- Write an backend endpoint that will send all the addresses of the user.
+
+## Milestone 24: Order Confirmation
+In this Milestone,
+
+- Create an order conformation page.
+- Display all the products we are ordering.
+- Display the address user selected to deliver.
+- Display the total value of the cart.
+- Place order button at the bottom.
+
+## Milestone 25: Place Order Backend
+In this Milestone,
+
+- Create an endpoint that will receive the products, user, address details.
+- Get the mail of the user using that you need to retrive the _id of the user.
+- For each product the order will be different with same address.
+- Using order schema we created earlier we will store order details in mongodb order collection.
+- The page will finally lead to the success endpoint if Successfull.

@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const product = require('./controllers/product');
 const path=require('path')
-
+const orders = require('./controllers/order')
 
 
 app.use(express.json());
@@ -25,6 +25,7 @@ const user = require("./controllers/user");
 
 app.use("/api/v2/user", user);
 app.use("/api/v2/product", product);
+app.use("/api/v2/orders", orders);
 
 // Serve static files for uploads and products
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
