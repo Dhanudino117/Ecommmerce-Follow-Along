@@ -41,12 +41,10 @@ router.post("/place-order", async (req, res) => {
     // Clear user's cart after placing orders (assuming a Cart model exists)
     await User.updateOne({ _id: user._id }, { $set: { cart: [] } });
 
-    res
-      .status(201)
-      .json({
-        message: "Orders placed and cart cleared successfully.",
-        orders,
-      });
+    res.status(201).json({
+      message: "Orders placed and cart cleared successfully.",
+      orders,
+    });
   } catch (error) {
     console.error("Error placing orders:", error);
     res.status(500).json({ message: error.message });
