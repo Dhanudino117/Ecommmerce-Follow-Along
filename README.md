@@ -182,3 +182,80 @@ In this Milestone,
 - Create and backend endpoint that will send all the user data using mail.
 - Create an frontend profile page that will display all the user data.
 - Display profile photo, name, mail and addresses.
+
+## Milestone 21: Address Page
+In this Milestone,
+
+- Create an frontend form that will will take address.
+- Take country, city, address1, address2, zip code, address type
+- Create an state that will store input address
+- Create address form frontend page
+- when we click on add address in profile it should navigate to this form page.
+
+
+## Milestone 22: Add Address
+In this Milestone,
+
+- Create an endpoint that will receive the address from address form in frontend.
+- Add the address to the address array inside user collection.
+- Display the address in the Profile section.
+
+## Milestone 23: Place Order
+In this Milestone,
+
+- Add an button inside cart called "Place order".
+- Create an select address page where we will display all the address and ask to select delivery address.
+- Write mongoose schema for storing orders details.
+- Create an placeorder button inside cart page and navigate to select address page when clicked.
+- Create and select address page that will display all the available address and have an option to select one address.
+- Write an backend endpoint that will send all the addresses of the user.
+
+## Milestone 24: Order Confirmation
+In this Milestone,
+
+- Create an order conformation page.
+- Display all the products we are ordering.
+- Display the address user selected to deliver.
+- Display the total value of the cart.
+- Place order button at the bottom.
+
+## Milestone 25: Place Order Backend
+In this Milestone,
+
+- Create an endpoint that will receive the products, user, address details.
+- Get the mail of the user using that you need to retrive the _id of the user.
+- For each product the order will be different with same address.
+- Using order schema we created earlier we will store order details in mongodb order collection.
+- The page will finally lead to the success endpoint if Successfull.
+
+
+## Milestone 26: Backend Endpoint
+In this Milestone,
+
+- Create an endpoint that will receive the user mail.
+- Get the mail of the user using that you need to retrive the _id of the user.
+- Use the _id to get all the orders of that user.
+- Send all the users orders in the response.
+- Also do Error management.
+
+## Milestone 27: My Orders Page
+In this Milestone,
+
+- Create an my-orders page.
+- Send a get request to my-orders endpoint that we created in previous milestone.
+- Send user mail in to endpoint to get all the user orders.
+- Display all the user orders.
+- Add my-orders page in navbar for better navigation.
+
+## Milestone 28: Cancel Order Feature
+
+In this Milestone,
+
+- Add a Cancel Order button next to each active order on the My Orders page.
+- Ensure the button is not displayed if the order is already canceled.
+- Create a POST API endpoint (/orders/cancel) to handle order cancellations.
+- Send the orderId in the request body to identify the order.
+- Update the order status to "Canceled" in the database.
+- Save the updated order and return an appropriate response.
+- Integrate the API with the frontend to allow users to cancel orders.
+- Refresh the My Orders page after a successful cancellation.
