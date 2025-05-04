@@ -12,6 +12,7 @@ import Profile from "./pages/profile"
 import CreateAddress from './pages/createAddress';
 import SelectAddress from './pages/Selectaddress';
 import OrderConfirmation from './pages/orderConfirmation';
+import MyOrdersPage from "./pages/myorder"
 const App = () => {
   return (
     <BrowserRouter>
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/create-address" element={<CreateAddress />} />     
         <Route path="/select-address" element={<SelectAddress />} />   
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
+        <Route path="/myorders" element={<MyOrdersPage/>}/>
     </Routes>
     </BrowserRouter>
     
